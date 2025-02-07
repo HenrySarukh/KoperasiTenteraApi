@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # .NET application container
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"  # Expose port 80 from the container to port 8080 on your local machine
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development  # Set the environment (you can change to Production when needed)
+      - ConnectionStrings__KoperasiTentera=Server=db;Database=KoperasiTentera;User Id=sa;Password=Admin123$;TrustServerCertificate=True;
+    depends_on:
+      - db
+
+  # SQL Server container
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Admin123$  # Set a strong password
+    ports:
+      - "1433:1433"  # Expose port 1433 for SQL Server
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
