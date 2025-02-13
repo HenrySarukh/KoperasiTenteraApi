@@ -1,6 +1,4 @@
-# Home Assignment - KoperasiTentera
-
-I have not added acceptance of privacy policy, PIN and biometric login within api as they need to be handled on Mobile side.
+# KoperasiTentera
 
 ## Overview
 
